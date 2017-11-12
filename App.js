@@ -1,17 +1,28 @@
 import React from 'react'
 import {TabNavigator} from 'react-navigation'
 import DeckList from './components/DeckList'
-import {StatusBar, StyleSheet, View} from 'react-native'
+import {StatusBar, StyleSheet, Text, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
-import {createStore} from 'redux'
 import {Provider} from 'react-redux'
-import reducer from './reducers'
+import store from './store'
+
 
 const styles = StyleSheet.create({
 	app: {
 		flex: 1,
 	},
+	about: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
 })
+
+const About = () => <View style={styles.about}>
+	<Text style={{fontSize: 35}}>Mobile Flash Cards</Text>
+	<Text>by Dario Varotto</Text>
+</View>
+
 
 const TabNav = TabNavigator({
 	Decks: {
@@ -20,7 +31,20 @@ const TabNav = TabNavigator({
 			tabBarLabel: 'UdaDecks',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
-					name='ion-ios-albums-outline'
+					name='ios-albums-outline'
+					size={26}
+					style={{color: tintColor}}
+				/>
+			),
+		},
+	},
+	About: {
+		screen: About,
+		navigationOptions: {
+			tabBarLabel: 'About',
+			tabBarIcon: ({tintColor, focused}) => (
+				<Ionicons
+					name='ios-albums-outline'
 					size={26}
 					style={{color: tintColor}}
 				/>
@@ -29,8 +53,9 @@ const TabNav = TabNavigator({
 	},
 })
 
+
 const App = () => {
-	return <Provider store={createStore(reducer)}>
+	return <Provider store={store}>
 		<View style={styles.app}>
 			<StatusBar hidden={true}/>
 			<TabNav/>

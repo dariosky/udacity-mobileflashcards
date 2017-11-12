@@ -1,7 +1,7 @@
 import {AsyncStorage} from 'react-native'
-import {formatData} from './_deck'
+import {DECK_STORAGE_KEY, formatData} from './_deck'
 
-export function getDecks() {
+export function getData() {
 	return AsyncStorage.getItem(DECK_STORAGE_KEY)
 		.then(formatData)
 }
