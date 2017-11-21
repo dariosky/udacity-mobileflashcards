@@ -1,10 +1,11 @@
 import React from 'react'
-import {TabNavigator} from 'react-navigation'
+import {StackNavigator, TabNavigator} from 'react-navigation'
 import DeckList from './components/DeckList'
 import {StatusBar, StyleSheet, Text, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import {Provider} from 'react-redux'
 import store from './store'
+import DeckDetail from './components/DeckDetail'
 
 
 const styles = StyleSheet.create({
@@ -38,17 +39,52 @@ const TabNav = TabNavigator({
 			),
 		},
 	},
+
+	NewDeck: {
+		screen: About,
+		navigationOptions: {
+			tabBarLabel: 'New Deck',
+			tabBarIcon: ({tintColor, focused}) => (
+				<Ionicons
+					name='ios-add-circle-outline'
+					size={26}
+					style={{color: tintColor}}
+				/>
+			),
+		},
+	},
+
 	About: {
 		screen: About,
 		navigationOptions: {
 			tabBarLabel: 'About',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
-					name='ios-albums-outline'
+					name='ios-information-circle-outline'
 					size={26}
 					style={{color: tintColor}}
 				/>
 			),
+		},
+	},
+
+}, {
+	navigationOptions: {
+		header: null,
+	},
+})
+
+const MainNavigator = StackNavigator({
+	Home: {
+		screen: TabNav,
+	},
+	DeckDetail: {
+		screen: DeckDetail,
+		navigationOptions: {
+			headerTintColor: '#FFF',
+			headerStyle: {
+				backgroundColor: '#00F',
+			},
 		},
 	},
 })
@@ -58,7 +94,7 @@ const App = () => {
 	return <Provider store={store}>
 		<View style={styles.app}>
 			<StatusBar hidden={true}/>
-			<TabNav/>
+			<MainNavigator/>
 		</View>
 	</Provider>
 }

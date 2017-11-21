@@ -3,7 +3,7 @@ import * as api from '../store/api'
 export const GET_DECKS = 'GET_DECKS'
 
 export function gotDecks(decks) {
-	console.log("got decks", decks)
+	// console.log("got decks", decks)
 	return {
 		type: GET_DECKS,
 		decks,

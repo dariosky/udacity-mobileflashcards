@@ -1,7 +1,8 @@
-import {StyleSheet, Text, View} from 'react-native'
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
+import {NavigationActions} from 'react-navigation'
 
 class DeckList extends React.Component {
 	componentDidMount() {
@@ -10,7 +11,17 @@ class DeckList extends React.Component {
 		)
 	}
 
+	onClick = (deck) => {
+		console.log("Clicked", deck.name)
+		const {navigate} = this.props.navigation
+		navigate(
+			'DeckDetail',
+			{name: deck.name},
+		)
+	}
+
 	render() {
+		// console.log("Decklist props", Object.keys(this.props))
 		const {decks} = this.props
 		{/*<Text>{JSON.stringify(decks)}</Text>*/
 		}
@@ -21,6 +32,7 @@ class DeckList extends React.Component {
 					Create one tapping 'NEW DECK'
 				</Text>
 				: decks.map(deck => <Deck deck={deck}
+				                          onClick={() => this.onClick(deck)}
 				                          key={deck.name}/>)
 			}
 		</View>
@@ -42,17 +54,20 @@ export default connect(
 	},
 )(DeckList)
 
-
 class Deck extends React.Component {
 	render() {
+		// console.log("Deck props", Object.keys(this.props))
 		const {name, cards} = this.props.deck
 		const len = cards.length
-		return <View style={styleDeck.container}>
-			<Text style={styleDeck.title}>{name}</Text>
-			<Text>
-				{len === 1 ? '1 card' : `${len} cards`}
-			</Text>
-		</View>
+		return <TouchableOpacity
+			onPress={this.props.onClick}>
+			<View style={styleDeck.container}>
+				<Text style={styleDeck.title}>{name}</Text>
+				<Text>
+					{len === 1 ? '1 card' : `${len} cards`}
+				</Text>
+			</View>
+		</TouchableOpacity>
 	}
 }
 

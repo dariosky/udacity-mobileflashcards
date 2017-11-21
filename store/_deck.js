@@ -49,7 +49,11 @@ function setDummyData() {
 }
 
 export function formatData(results) {
-	return results === null
-		? setDummyData()
-		: JSON.parse(results)
+	if (results === null) {
+		console.log("Starting with default data")
+		return setDummyData()
+	}
+	else {
+		return JSON.parse(results)
+	}
 }
