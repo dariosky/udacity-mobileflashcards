@@ -6,6 +6,7 @@ import {Ionicons} from '@expo/vector-icons'
 import {Provider} from 'react-redux'
 import store from './store'
 import DeckDetail from './components/DeckDetail'
+import AddCard from './components/AddCard'
 
 
 const styles = StyleSheet.create({
@@ -78,6 +79,7 @@ const MainNavigator = StackNavigator({
 	Home: {
 		screen: TabNav,
 	},
+
 	DeckDetail: {
 		screen: DeckDetail,
 		navigationOptions: {
@@ -85,6 +87,20 @@ const MainNavigator = StackNavigator({
 			headerStyle: {
 				backgroundColor: '#00F',
 			},
+		},
+	},
+
+	AddCard: {
+		screen: AddCard,
+		navigationOptions: {
+			tabBarLabel: 'Add card',
+			tabBarIcon: ({tintColor, focused}) => (
+				<Ionicons
+					name='ios-add-circle-outline'
+					size={26}
+					style={{color: tintColor}}
+				/>
+			),
 		},
 	},
 })
