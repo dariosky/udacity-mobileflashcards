@@ -49,7 +49,6 @@ class DeckDetail extends React.Component {
 		const {title} = this.props.navigation.state.params,
 			{decks}=this.props,
 			deck = this.props.decks[title]
-		console.log("decks:", JSON.stringify(decks))
 		const tot = deck.cards.length,
 			cardSize = tot === 1 ? `1 card` : `${tot} cards`
 		return <View style={styles.container}>

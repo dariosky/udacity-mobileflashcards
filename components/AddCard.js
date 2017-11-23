@@ -1,9 +1,11 @@
-import {StyleSheet, Text, TextInput, TouchableOpacity, View} from 'react-native'
+import {
+	StyleSheet, Text, TextInput,
+	TouchableOpacity, View,
+} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
 import styles from './styles'
-import * as api from '../store/api'
 
 const addCardStyle = StyleSheet.create({
 	container: {
@@ -35,7 +37,7 @@ class AddCard extends React.Component {
 
 	saveCard = () => {
 		if (!this.state.valid) {
-			console.log("invalid return")
+			console.log("invalid card")
 			return
 		}
 		const {question, answer} = this.state
@@ -43,11 +45,12 @@ class AddCard extends React.Component {
 		const card = {question, answer}
 
 
-		console.log("Saving card")
-		api.addCardToDeck(title, card)
+		this.props.dispatch(
+			actions.addCard(title, card),
+		)
 
 		const {navigation} = this.props
-		// navigation.goBack() // TODO: re-enable
+		navigation.goBack()
 	}
 
 	onChange = (field, value) => {

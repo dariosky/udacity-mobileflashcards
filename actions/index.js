@@ -1,9 +1,9 @@
 import * as api from '../store/api'
 
 export const GET_DECKS = 'GET_DECKS'
+export const DECK_UPDATED = 'DECK_UPDATED'
 
 export function gotDecks(decks) {
-	// console.log("got decks", decks)
 	return {
 		type: GET_DECKS,
 		decks,
@@ -20,3 +20,19 @@ export function getDecks() {
 	}
 }
 
+export function addCard(title, card) {
+	return dispatch => {
+		api.addCardToDeck(title, card).then(
+			deck => dispatch(
+				deckUpdated(deck),
+			),
+		)
+	}
+}
+
+export function deckUpdated(deck) {
+	return {
+		type: DECK_UPDATED,
+		deck,
+	}
+}

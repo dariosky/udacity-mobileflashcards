@@ -9,6 +9,16 @@ const reducer = (state = {}, action) => {
 				decks,
 			}
 		}
+		case actions.DECK_UPDATED: {
+			const {deck} = action
+			return {
+				...state,
+				decks: {
+					...state.decks,
+					[deck.title]: deck,
+				},
+			}
+		}
 		default:
 			return state
 	}
