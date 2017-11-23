@@ -25,7 +25,7 @@ class AddCard extends React.Component {
 
 	saveCard = () => {
 		if (!this.state.valid) {
-			console.log("invalid card")
+			// console.log("invalid card")
 			return
 		}
 		const {question, answer} = this.state

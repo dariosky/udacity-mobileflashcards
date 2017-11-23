@@ -10,6 +10,7 @@ import AddCard from './components/AddCard'
 import NewDeck from './components/NewDeck'
 import Quiz from './components/Quiz'
 import styles, {primaryColor, primaryColorBk} from './components/styles'
+import {setLocalNotification} from './store/notifications'
 
 
 const About = () => <View style={styles.centered}>
@@ -127,13 +128,19 @@ const MainNavigator = StackNavigator({
 })
 
 
-const App = () => {
-	return <Provider store={store}>
-		<View style={styles.full}>
-			<StatusBar hidden={true}/>
-			<MainNavigator/>
-		</View>
-	</Provider>
+class App extends React.Component {
+	componentDidMount() {
+		setLocalNotification()
+	}
+
+	render() {
+		return <Provider store={store}>
+			<View style={styles.full}>
+				<StatusBar hidden={true}/>
+				<MainNavigator/>
+			</View>
+		</Provider>
+	}
 }
 
 

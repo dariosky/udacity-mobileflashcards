@@ -7,7 +7,7 @@ class DeckMenu extends React.Component {
 	addCard = () => {
 		const title = this.props.title
 		const {navigate} = this.props.navigation
-		console.log("Adding card to", title)
+		// console.log("Adding card to", title)
 		navigate(
 			'AddCard',
 			{title: title},
@@ -17,7 +17,7 @@ class DeckMenu extends React.Component {
 	startQuiz = () => {
 		const title = this.props.title
 		const {navigate} = this.props.navigation
-		console.log("Start quiz", title)
+		// console.log("Start quiz", title)
 		navigate(
 			'Quiz',
 			{title: title},

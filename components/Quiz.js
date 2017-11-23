@@ -3,6 +3,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import styles from './styles'
 import {Entypo, Octicons} from '@expo/vector-icons'
+import {clearLocalNotification, setLocalNotification} from '../store/notifications'
 
 function shuffle(a) {
 	// shuffle: by sorting via a random key
@@ -60,6 +61,10 @@ class Quiz extends React.Component {
 		})
 	}
 	onDone = () => {
+		/* Quiz completed, let's remind to train again tomorrow */
+		clearLocalNotification()
+			.then(setLocalNotification)
+
 		const {navigate} = this.props.navigation
 		navigate('Decks')
 	}
