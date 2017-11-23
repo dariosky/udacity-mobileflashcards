@@ -1,6 +1,13 @@
 import {StyleSheet} from 'react-native'
 
+export const primaryColor = '#c50014'
+export const primaryColorBk = '#FFF'
+export const secondaryColor = '#333'
+
 const styles = StyleSheet.create({
+	full: {
+		flex: 1,
+	},
 	container: {
 		flex: 1,
 		alignItems: 'center',
@@ -23,12 +30,16 @@ const styles = StyleSheet.create({
 		borderWidth: 0.5,
 	},
 	menuButtonDefault: {
-		backgroundColor: '#222',
+		backgroundColor: primaryColor,
+	},
+	buttonText: {
+		textAlign: 'center',
 	},
 	buttonTextDefault: {
 		textAlign: 'center',
-		color: '#fff',
+		color: primaryColorBk,
 	},
+
 	inputBox: {
 		padding: 20,
 		margin: 10,
@@ -39,6 +50,16 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 25,
 	},
+	textBig: {
+		fontSize: 35,
+	},
+	textSmall: {
+		fontSize: 15,
+		color: '#444',
+	},
+	textCentered: {
+		textAlign: 'center',
+	},
 	form: {
 		flex: 1,
 		alignContent: 'center',
@@ -46,6 +67,21 @@ const styles = StyleSheet.create({
 	},
 	error: {
 		backgroundColor: '#fdd',
+	},
+	centered: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	textPrimary: {
+		color: primaryColor,
+	},
+
+	buttonCorrect: {
+		backgroundColor: 'green',
+	},
+	buttonIncorrect: {
+		backgroundColor: 'red',
 	},
 })
 

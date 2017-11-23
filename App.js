@@ -1,31 +1,28 @@
 import React from 'react'
 import {StackNavigator, TabNavigator} from 'react-navigation'
 import DeckList from './components/DeckList'
-import {StatusBar, StyleSheet, Text, View} from 'react-native'
+import {StatusBar, Text, View} from 'react-native'
 import {Ionicons} from '@expo/vector-icons'
 import {Provider} from 'react-redux'
 import store from './store'
 import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
 import NewDeck from './components/NewDeck'
+import Quiz from './components/Quiz'
+import styles, {primaryColor, primaryColorBk} from './components/styles'
 
 
-const styles = StyleSheet.create({
-	app: {
-		flex: 1,
-	},
-	about: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-})
-
-const About = () => <View style={styles.about}>
+const About = () => <View style={styles.centered}>
 	<Text style={{fontSize: 35}}>Mobile Flash Cards</Text>
 	<Text>by Dario Varotto</Text>
 </View>
 
+const navigationOptions = {
+	headerTintColor: primaryColorBk,
+	headerStyle: {
+		backgroundColor: primaryColor,
+	},
+}
 
 const TabNav = TabNavigator({
 	Decks: {
@@ -35,10 +32,11 @@ const TabNav = TabNavigator({
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
 					name='ios-albums-outline'
-					size={26}
-					style={{color: tintColor}}
+					size={30}
+					style={{color: primaryColorBk}}
 				/>
 			),
+			...navigationOptions
 		},
 	},
 
@@ -49,8 +47,8 @@ const TabNav = TabNavigator({
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
 					name='ios-add-outline'
-					size={26}
-					style={{color: tintColor}}
+					size={30}
+					style={{color: primaryColorBk}}
 				/>
 			),
 		},
@@ -63,7 +61,7 @@ const TabNav = TabNavigator({
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
 					name='ios-information-circle-outline'
-					size={26}
+					size={30}
 					style={{color: tintColor}}
 				/>
 			),
@@ -74,6 +72,17 @@ const TabNav = TabNavigator({
 	navigationOptions: {
 		header: null,
 	},
+	tabBarOptions: {
+		activeTintColor: 'white',
+		inactiveTintColor: 'lightgray',
+		labelStyle: {
+			fontSize: 12,
+		},
+		style: {
+			backgroundColor: primaryColor,
+		},
+	},
+
 })
 
 const MainNavigator = StackNavigator({
@@ -84,17 +93,13 @@ const MainNavigator = StackNavigator({
 	DeckDetail: {
 		screen: DeckDetail,
 		navigationOptions: {
-			headerTintColor: '#FFF',
-			headerStyle: {
-				backgroundColor: '#00F',
-			},
+			...navigationOptions
 		},
 	},
 
 	AddCard: {
 		screen: AddCard,
 		navigationOptions: {
-			tabBarLabel: 'Add card',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
 					name='ios-add-circle-outline'
@@ -102,6 +107,21 @@ const MainNavigator = StackNavigator({
 					style={{color: tintColor}}
 				/>
 			),
+			...navigationOptions
+		},
+	},
+
+	Quiz: {
+		screen: Quiz,
+		navigationOptions: {
+			tabBarIcon: ({tintColor, focused}) => (
+				<Ionicons
+					name='ios-add-circle-outline'
+					size={26}
+					style={{color: tintColor}}
+				/>
+			),
+			...navigationOptions
 		},
 	},
 })
@@ -109,7 +129,7 @@ const MainNavigator = StackNavigator({
 
 const App = () => {
 	return <Provider store={store}>
-		<View style={styles.app}>
+		<View style={styles.full}>
 			<StatusBar hidden={true}/>
 			<MainNavigator/>
 		</View>

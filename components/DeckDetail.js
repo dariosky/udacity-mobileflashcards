@@ -1,6 +1,5 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
-import * as actions from '../actions'
 import {connect} from 'react-redux'
 import styles from './styles'
 
@@ -16,6 +15,13 @@ class DeckMenu extends React.Component {
 	}
 
 	startQuiz = () => {
+		const title = this.props.title
+		const {navigate} = this.props.navigation
+		console.log("Start quiz", title)
+		navigate(
+			'Quiz',
+			{title: title},
+		)
 	}
 
 	render() {

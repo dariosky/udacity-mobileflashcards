@@ -52,10 +52,12 @@ class NewDeck extends React.Component {
 	render() {
 		const {errors} = this.state
 		return <View style={styles.form}>
-			<Text style={styles.text}>What's the title of your new Deck?</Text>
+			<Text style={[styles.text, styles.textCentered]}>
+				What's the title of your new Deck?
+			</Text>
 			<View style={[styles.inputBox, errors.title ? styles.error : null]}>
 				<TextInput style={[styles.text, styles.input]}
-				           placeholder='Type a question'
+				           placeholder='Deck title'
 				           onChangeText={value => this.onChange('title', value)}
 				           value={this.state.title}
 				/>

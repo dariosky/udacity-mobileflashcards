@@ -52,7 +52,6 @@ export function formatData(results) {
 		return setDummyData()
 	}
 	else {
-		console.log("Got data")
 		return JSON.parse(results)
 	}
 }

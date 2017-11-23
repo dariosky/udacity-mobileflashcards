@@ -2,7 +2,6 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
-import {NavigationActions} from 'react-navigation'
 
 class DeckList extends React.Component {
 	componentDidMount() {
@@ -12,7 +11,6 @@ class DeckList extends React.Component {
 	}
 
 	onClick = (deck) => {
-		console.log("Clicked", deck.title)
 		const {navigate} = this.props.navigation
 		navigate(
 			'DeckDetail',
