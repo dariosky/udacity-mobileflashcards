@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import store from './store'
 import DeckDetail from './components/DeckDetail'
 import AddCard from './components/AddCard'
+import NewDeck from './components/NewDeck'
 
 
 const styles = StyleSheet.create({
@@ -42,12 +43,12 @@ const TabNav = TabNavigator({
 	},
 
 	NewDeck: {
-		screen: About,
+		screen: NewDeck,
 		navigationOptions: {
 			tabBarLabel: 'New Deck',
 			tabBarIcon: ({tintColor, focused}) => (
 				<Ionicons
-					name='ios-add-circle-outline'
+					name='ios-add-outline'
 					size={26}
 					style={{color: tintColor}}
 				/>

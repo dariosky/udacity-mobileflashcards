@@ -39,6 +39,14 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 25,
 	},
+	form: {
+		flex: 1,
+		alignContent: 'center',
+		justifyContent: 'space-around',
+	},
+	error: {
+		backgroundColor: '#fdd',
+	},
 })
 
 export default styles

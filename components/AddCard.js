@@ -1,20 +1,8 @@
-import {
-	StyleSheet, Text, TextInput,
-	TouchableOpacity, View,
-} from 'react-native'
+import {Text, TextInput, TouchableOpacity, View,} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
 import styles from './styles'
-
-const addCardStyle = StyleSheet.create({
-	container: {
-		flex: 1,
-		alignContent: 'center',
-		justifyContent: 'space-around',
-	},
-	inputError: {backgroundColor: '#fdd'},
-})
 
 class AddCard extends React.Component {
 	state = {
@@ -61,9 +49,8 @@ class AddCard extends React.Component {
 		const {title} = this.props.navigation.state.params,
 			deck = this.props.decks[title],
 			tot = deck.cards.length,
-			cardSize = tot === 1 ? `1 card` : `${tot} cards`,
 			{errors} = this.state
-		return <View style={addCardStyle.container}>
+		return <View style={styles.form}>
 			<View style={[styles.inputBox, errors.question ? addCardStyle.inputError : null]}>
 				<TextInput style={[styles.text, styles.input]}
 				           placeholder='Type a question'
@@ -72,7 +59,7 @@ class AddCard extends React.Component {
 				/>
 			</View>
 
-			<View style={[styles.inputBox, errors.answer ? addCardStyle.inputError : null]}>
+			<View style={[styles.inputBox, errors.answer ? styles.error : null]}>
 				<TextInput style={[styles.text, styles.input]}
 				           placeholder='Type the answer'
 				           onChangeText={value => this.onChange('answer', value)}
