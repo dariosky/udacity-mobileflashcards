@@ -12,28 +12,28 @@ class DeckList extends React.Component {
 	}
 
 	onClick = (deck) => {
-		console.log("Clicked", deck.name)
+		console.log("Clicked", deck.title)
 		const {navigate} = this.props.navigation
 		navigate(
 			'DeckDetail',
-			{name: deck.name},
+			{title: deck.title},
 		)
 	}
 
 	render() {
 		// console.log("Decklist props", Object.keys(this.props))
 		const {decks} = this.props
-		{/*<Text>{JSON.stringify(decks)}</Text>*/
-		}
+
 		return <View style={stylesList.container}>
 			{!decks ?
 				<Text>
 					No decks of card yet!
 					Create one tapping 'NEW DECK'
 				</Text>
-				: decks.map(deck => <Deck deck={deck}
-				                          onClick={() => this.onClick(deck)}
-				                          key={deck.name}/>)
+				: Object.values(decks).map(deck =>
+					<Deck deck={deck}
+					      onClick={() => this.onClick(deck)}
+					      key={deck.title}/>)
 			}
 		</View>
 	}
@@ -57,12 +57,12 @@ export default connect(
 class Deck extends React.Component {
 	render() {
 		// console.log("Deck props", Object.keys(this.props))
-		const {name, cards} = this.props.deck
+		const {title, cards} = this.props.deck
 		const len = cards.length
 		return <TouchableOpacity
 			onPress={this.props.onClick}>
 			<View style={styleDeck.container}>
-				<Text style={styleDeck.title}>{name}</Text>
+				<Text style={styleDeck.title}>{title}</Text>
 				<Text>
 					{len === 1 ? '1 card' : `${len} cards`}
 				</Text>

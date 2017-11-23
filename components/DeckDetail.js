@@ -6,12 +6,12 @@ import styles from './styles'
 
 class DeckMenu extends React.Component {
 	addCard = () => {
-		const deckName = this.props.name
+		const title = this.props.title
 		const {navigate} = this.props.navigation
-		console.log("Adding card to", deckName)
+		console.log("Adding card to", title)
 		navigate(
 			'AddCard',
-			{name: deckName},
+			{title: title},
 		)
 	}
 
@@ -42,24 +42,23 @@ class DeckMenu extends React.Component {
 
 class DeckDetail extends React.Component {
 	static navigationOptions = ({navigation}) => ({
-		title: navigation.state.params.name,
+		title: navigation.state.params.title,
 	})
 
 	render() {
-		const {name} = this.props.navigation.state.params,
-			decks = this.props.decks.filter(deck => deck.name === name)
-		if (decks.length === 0)
-			return null
-		const deck = decks[0],
-			tot = deck.cards.length,
+		const {title} = this.props.navigation.state.params,
+			{decks}=this.props,
+			deck = this.props.decks[title]
+		console.log("decks:", JSON.stringify(decks))
+		const tot = deck.cards.length,
 			cardSize = tot === 1 ? `1 card` : `${tot} cards`
 		return <View style={styles.container}>
 			<View>
-				<Text style={styles.title}>{name}</Text>
+				<Text style={styles.title}>{title}</Text>
 				<Text style={styles.subtitle}>{cardSize}</Text>
 			</View>
 			<DeckMenu navigation={this.props.navigation}
-			          name={name}/>
+			          title={title}/>
 		</View>
 	}
 }

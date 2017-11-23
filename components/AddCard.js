@@ -3,6 +3,7 @@ import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
 import styles from './styles'
+import * as api from '../store/api'
 
 const addCardStyle = StyleSheet.create({
 	container: {
@@ -37,9 +38,16 @@ class AddCard extends React.Component {
 			console.log("invalid return")
 			return
 		}
-		const {navigation} = this.props
+		const {question, answer} = this.state
+		const {title} = this.props.navigation.state.params
+		const card = {question, answer}
+
+
 		console.log("Saving card")
-		navigation.goBack()
+		api.addCardToDeck(title, card)
+
+		const {navigation} = this.props
+		// navigation.goBack() // TODO: re-enable
 	}
 
 	onChange = (field, value) => {
@@ -47,11 +55,8 @@ class AddCard extends React.Component {
 	}
 
 	render() {
-		const {name} = this.props.navigation.state.params,
-			decks = this.props.decks.filter(deck => deck.name === name)
-		if (decks.length === 0)
-			return null
-		const deck = decks[0],
+		const {title} = this.props.navigation.state.params,
+			deck = this.props.decks[title],
 			tot = deck.cards.length,
 			cardSize = tot === 1 ? `1 card` : `${tot} cards`,
 			{errors} = this.state

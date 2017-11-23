@@ -13,7 +13,7 @@ export function gotDecks(decks) {
 export function getDecks() {
 	// async thunk
 	return dispatch => {
-		api.getData()
+		api.getDecks()
 			.then(
 				data => dispatch(gotDecks(data.decks)),
 			)

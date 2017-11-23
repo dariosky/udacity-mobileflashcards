@@ -10,9 +10,9 @@ function setDummyData() {
 	const now = Date.now()
 
 	let dummyData = {
-		decks: [
-			{
-				name: 'udacicards',
+		decks: {
+			'udacicards': {
+				title: 'udacicards',
 				creation_time: now,
 				cards: [
 					{
@@ -21,8 +21,8 @@ function setDummyData() {
 					},
 				],
 			},
-			{
-				name: 'Fruits and Veggies',
+			'Fruits and Veggies': {
+				title: 'Fruits and Veggies',
 				creation_time: now,
 				cards: [
 					{
@@ -34,14 +34,12 @@ function setDummyData() {
 						answer: 'No, it\' a tuber',
 					},
 					{
-						question: 'Did Snowhite ate a broccoli?',
+						question: 'Did Snowhite ate broccoli?',
 						answer: 'No, she ate an apple',
 					},
 				],
 			},
-		],
-
-
+		},
 	}
 	AsyncStorage.setItem(DECK_STORAGE_KEY, JSON.stringify(dummyData))
 
@@ -54,6 +52,7 @@ export function formatData(results) {
 		return setDummyData()
 	}
 	else {
+		console.log("Got data")
 		return JSON.parse(results)
 	}
 }
