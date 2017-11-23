@@ -1,7 +1,9 @@
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
+import styles from './styles'
+import sortBy from 'sort-by'
 
 class DeckList extends React.Component {
 	componentDidMount() {
@@ -21,18 +23,26 @@ class DeckList extends React.Component {
 	render() {
 		// console.log("Decklist props", Object.keys(this.props))
 		const {decks} = this.props
+		let content
+		if (!decks) content = <Text style={styles.full}>
+			No decks of card yet!
+			Create one tapping 'NEW DECK'
+		</Text>
+		else {
+			const sortedDecks = Object.values(decks).sort(sortBy('-creation_time'))
+			content = <FlatList
+				data={sortedDecks}
+				keyExtractor={item => item.title}
+				renderItem={({item}) => {
+					return <Deck deck={item}
+					             onClick={() => this.onClick(item)}
+					             key={item.title}/>
+				}}
+			/>
+		}
 
 		return <View style={stylesList.container}>
-			{!decks ?
-				<Text>
-					No decks of card yet!
-					Create one tapping 'NEW DECK'
-				</Text>
-				: Object.values(decks).map(deck =>
-					<Deck deck={deck}
-					      onClick={() => this.onClick(deck)}
-					      key={deck.title}/>)
-			}
+			{content}
 		</View>
 	}
 }
