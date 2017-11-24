@@ -7,6 +7,7 @@ import DeckList from './components/DeckList'
 import Quiz from './components/Quiz'
 import AddCard from './components/AddCard'
 import {About} from './components/About'
+import {Ionicons} from '@expo/vector-icons'
 
 const navigationOptions = {
 	headerTintColor: primaryColorBk,

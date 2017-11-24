@@ -1,4 +1,4 @@
-import {Text, TextInput, TouchableOpacity, View,} from 'react-native'
+import {KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View,} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
@@ -42,7 +42,7 @@ class NewDeck extends React.Component {
 		const {navigation} = this.props
 		this.setState(initialState)
 
-		navigation.navigate('Decks')
+		navigation.navigate('DeckDetail', {title})
 	}
 
 	onChange = (field, value) => {
@@ -51,7 +51,9 @@ class NewDeck extends React.Component {
 
 	render() {
 		const {errors} = this.state
-		return <View style={styles.form}>
+		return <KeyboardAvoidingView
+			behavior="padding"
+			style={styles.form}>
 			<Text style={[styles.text, styles.textCentered]}>
 				What's the title of your new Deck?
 			</Text>
@@ -66,11 +68,11 @@ class NewDeck extends React.Component {
 			<TouchableOpacity onPress={this.saveDeck} disabled={!this.state.valid}>
 				<View style={[styles.menuButton, styles.menuButtonDefault]}>
 					<Text style={[styles.text, styles.buttonTextDefault]}>
-						Submit
+						Create
 					</Text>
 				</View>
 			</TouchableOpacity>
-		</View>
+		</KeyboardAvoidingView>
 	}
 }
 

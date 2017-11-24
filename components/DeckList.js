@@ -1,4 +1,4 @@
-import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native'
+import {FlatList, Text, TouchableOpacity, View} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
@@ -41,19 +41,11 @@ class DeckList extends React.Component {
 			/>
 		}
 
-		return <View style={stylesList.container}>
+		return <View style={styles.full}>
 			{content}
 		</View>
 	}
 }
-
-const stylesList = StyleSheet.create({
-	container: {
-		// flex: 1,
-		backgroundColor: '#fff',
-		justifyContent: 'flex-start',
-	},
-})
 
 export default connect(
 	state => {
@@ -69,8 +61,8 @@ class Deck extends React.Component {
 		const len = cards.length
 		return <TouchableOpacity
 			onPress={this.props.onClick}>
-			<View style={styleDeck.container}>
-				<Text style={styleDeck.title}>{title}</Text>
+			<View style={styles.deck}>
+				<Text style={styles.text}>{title}</Text>
 				<Text>
 					{len === 1 ? '1 card' : `${len} cards`}
 				</Text>
@@ -78,16 +70,3 @@ class Deck extends React.Component {
 		</TouchableOpacity>
 	}
 }
-
-const styleDeck = StyleSheet.create({
-	container: {
-		alignItems: 'center',
-		height: 100,
-		padding: 30,
-		borderWidth: 0.5,
-		borderColor: '#d6d7da',
-	},
-	title: {
-		fontSize: 25,
-	},
-})

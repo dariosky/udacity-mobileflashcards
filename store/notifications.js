@@ -30,7 +30,7 @@ export function setLocalNotification() {
 	AsyncStorage.getItem(NOTIFICATION_KEY)
 		.then(JSON.parse)
 		.then((data) => {
-			console.log("Notification data", data)
+			// console.log("Notification data", data)
 			if (data === null) {
 				Permissions.askAsync(Permissions.NOTIFICATIONS)
 					.then(({status}) => {
@@ -48,7 +48,7 @@ export function setLocalNotification() {
 								tomorrow.setMinutes(0)
 								tomorrow.setSeconds(0)
 							}
-							console.log("Setting local notification at", tomorrow)
+							// console.log("Setting local notification at", tomorrow)
 							Notifications.scheduleLocalNotificationAsync(
 								createNotification(),
 								{

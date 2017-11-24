@@ -83,6 +83,13 @@ const styles = StyleSheet.create({
 	buttonIncorrect: {
 		backgroundColor: 'red',
 	},
+	deck: {
+		alignItems: 'center',
+		height: 100,
+		padding: 30,
+		borderWidth: 0.5,
+		borderColor: '#d6d7da',
+	},
 })
 
 export default styles

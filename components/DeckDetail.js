@@ -53,8 +53,11 @@ class DeckDetail extends React.Component {
 
 	render() {
 		const {title} = this.props.navigation.state.params,
-			{decks}=this.props,
+			{decks} = this.props,
 			deck = this.props.decks[title]
+		if (!deck) {
+			return null // deck is not ready yet!
+		}
 		const tot = deck.cards.length,
 			cardSize = tot === 1 ? `1 card` : `${tot} cards`
 		return <View style={styles.container}>
@@ -68,6 +71,5 @@ class DeckDetail extends React.Component {
 	}
 }
 
-export default connect(state => {
-	return {decks: state.decks}
-})(DeckDetail)
+const mapStateToProps = ({decks}) => ({decks})
+export default connect(mapStateToProps)(DeckDetail)

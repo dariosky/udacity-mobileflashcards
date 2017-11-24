@@ -1,4 +1,4 @@
-import {Text, TextInput, TouchableOpacity, View,} from 'react-native'
+import {KeyboardAvoidingView, Text, TextInput, TouchableOpacity, View,} from 'react-native'
 import React from 'react'
 import * as actions from '../actions'
 import {connect} from 'react-redux'
@@ -50,7 +50,10 @@ class AddCard extends React.Component {
 			deck = this.props.decks[title],
 			tot = deck.cards.length,
 			{errors} = this.state
-		return <View style={styles.form}>
+		return <KeyboardAvoidingView
+			style={styles.form}
+			behavior="padding"
+		>
 			<View style={[styles.inputBox, errors.question ? addCardStyle.inputError : null]}>
 				<TextInput style={[styles.text, styles.input]}
 				           placeholder='Type a question'
@@ -72,7 +75,7 @@ class AddCard extends React.Component {
 					<Text style={[styles.text, styles.buttonTextDefault]}>Submit</Text>
 				</View>
 			</TouchableOpacity>
-		</View>
+		</KeyboardAvoidingView>
 	}
 }
 

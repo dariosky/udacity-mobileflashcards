@@ -1,15 +1,16 @@
 import * as actions from '../actions'
+import * as actionType from '../actions/types'
 
 const reducer = (state = {}, action) => {
 	switch (action.type) {
-		case actions.GET_DECKS: {
+		case actionType.GET_DECKS: {
 			const {decks} = action
 			return {
 				...state,
 				decks,
 			}
 		}
-		case actions.DECK_UPDATED: {
+		case actionType.DECK_UPDATED: {
 			const {deck} = action
 			return {
 				...state,

@@ -1,7 +1,5 @@
 import * as api from '../store/api'
-
-export const GET_DECKS = 'GET_DECKS'
-export const DECK_UPDATED = 'DECK_UPDATED'
+import {DECK_UPDATED, GET_DECKS} from './types'
 
 export function gotDecks(decks) {
 	return {
