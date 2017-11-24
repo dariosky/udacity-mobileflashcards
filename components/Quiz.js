@@ -17,7 +17,7 @@ class Quiz extends React.Component {
 		this.reset()
 	}
 
-	reset() {
+	reset = () => {
 		const {title} = this.props.navigation.state.params,
 			deck = this.props.decks[title]
 		let shuffledCards = shuffle([...deck.cards])
@@ -60,14 +60,6 @@ class Quiz extends React.Component {
 			}
 		})
 	}
-	onDone = () => {
-		/* Quiz completed, let's remind to train again tomorrow */
-		clearLocalNotification()
-			.then(setLocalNotification)
-
-		const {navigate} = this.props.navigation
-		navigate('Decks')
-	}
 
 	render() {
 		const {current, total, correct, incorrect, cardView} = this.state,
@@ -76,9 +68,8 @@ class Quiz extends React.Component {
 		if (current > total) {
 			const props = {
 				navigation: this.props.navigation,
-				total,
-				correct, incorrect,
-				onDone: this.onDone,
+				total, correct, incorrect,
+				reset: this.reset,
 			}
 			return <View style={styles.full}>
 				<Summary {...props}/>
@@ -167,6 +158,17 @@ class Card extends React.Component {
 }
 
 class Summary extends React.Component {
+	componentDidMount() {
+		/* Quiz completed, let's remind to train again tomorrow */
+		clearLocalNotification()
+			.then(setLocalNotification)
+	}
+
+	backToDeck = () => {
+		const {navigation} = this.props
+		navigation.goBack()
+	}
+
 	render() {
 		const {correct, incorrect, total, onDone} = this.props
 		const percent = Math.round(correct * 100 / total)
@@ -221,12 +223,22 @@ class Summary extends React.Component {
 
 		return <View style={[styles.full, styles.centered]}>
 			{content}
+
 			<TouchableOpacity
-				onPress={onDone}>
+				onPress={this.props.reset}>
+				<View style={[styles.menuButton]}>
+					<Text style={[styles.text, styles.buttonText]}>
+						Restart Quiz
+					</Text>
+				</View>
+			</TouchableOpacity>
+
+			<TouchableOpacity
+				onPress={this.backToDeck}>
 				<View style={[styles.menuButton, styles.menuButtonDefault]}>
 					<Text style={[styles.text, styles.buttonText,
 						styles.buttonTextDefault]}>
-						Continue
+						Back to Deck
 					</Text>
 				</View>
 			</TouchableOpacity>
